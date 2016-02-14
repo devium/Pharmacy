@@ -1,0 +1,31 @@
+.navbar-static-top .nav {
+    padding: 15px 0;
+}
+
+@media (max-width: 767px) {
+    .navbar-brand {
+        padding: 0;
+    }
+
+    .navbar-brand img {
+        margin-top: 5px;
+        margin-left: 5px;
+    }
+}
+
+.jumbotron {
+  background-image: url("../img/large_placeholder.jpg");
+  margin-top: -20px;
+  height: 90vh;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.jumbotron .input-group {
+  position: relative;
+  top: 20vh;
+}
+
+.footer-wrapper p {
+  text-align: center;
+}
