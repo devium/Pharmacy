@@ -1,0 +1,111 @@
+.container.text-center {
+    padding: 0 32px;
+    min-height: 80vh;
+    padding-left: 170px;
+    padding-right: 170px;
+}
+
+.container.text-center h1 {
+    padding-bottom: 30px;
+}
+
+.col-md-7.col-sm-9 {
+    padding-left: 200px;
+    margin-bottom: 72px;
+}
+
+.row {
+    box-shadow: 0 1px 0 #e1e5e8;
+    padding-bottom: 0;
+    padding-left: 15px;
+    background-color: #ffffff;
+    margin-bottom: 11px;
+}
+
+.columnCaptions {
+    color: #7e93a7;
+    font-size: 12px;
+    text-transform: uppercase;
+    padding: 0;
+    box-shadow: 0 0 0;
+    background-color: #f2f6f9;
+}
+
+.itemName {
+    color: #727578;
+    font-size: 16px;
+    font-weight: bold;
+    padding-left: 25px;
+}
+
+.quantity {
+    color: #4ea6bc;
+    font-size: 18px;
+    font-weight: bold;
+    width: 42px;
+    padding-left: 7px;
+}
+
+.price {
+    color: #f06953;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.popbtn {
+    background-color: #e6edf3;
+    margin-left: 25px;
+    height: 63px;
+    width: 40px;
+    padding: 32px 0 0 14px !important;
+    cursor: pointer;
+}
+
+.arrow {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid #858e97;
+}
+
+.totals{
+    background-color: #f2f6f9;
+}
+
+.totals td {
+    padding: 40px 15px 40px 0;
+}
+
+.totals .price {
+    float: left;
+}
+
+.totals .itemName {
+    margin-top: 1px;
+}
+
+.totals .order{
+    float: right;
+    padding: 0;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+.order a {
+    background-color: #f08573;
+    color: #fbfffa;
+    font-weight: bold;
+    border: none;
+    padding: 7px 12px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+}
+
+.glyphicon{
+    width: 24px;
+    font-size: 24px;
+    padding: 0;
+}
+

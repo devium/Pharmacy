@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/cart.css">
   </head>
 
   <body>
@@ -39,7 +40,64 @@
       </div>
     </nav>
 
-    <h1>Здесь будет какая-то логика</h1>
+    <div class="container text-center">
+      <h1>Корзина</h1>
+      <table class="table">
+        <thead class="thread-default">
+          <tr class="row list-inline columnCaptions">
+            <th>Количество</th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row">
+            <td class="quantity">5</td>
+            <td class="itemName" align="left">Новокаин</td>
+            <td class="price" align="left">150 руб.</td>
+            <td>
+              <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+              </button>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="quantity">1</td>
+            <td class="itemName" align="left"> Назонекс</td>
+            <td class="price" align="left">800 руб.</td>
+            <td>
+              <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+              </button>
+            </td>
+          </tr>
+          <tr class="row">
+            <td class="quantity">2</td>
+            <td class="itemName" align="left">Закофальк</td>
+            <td class="price" align="left">2000 руб.</td>
+            <td>
+              <button type="button" class="btn btn-default btn-xs" aria-label="Left Align">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
+              </button>
+            </td>
+          </tr>
+          <tr class="row totals">
+            <td class="itemName">Всего:</td>
+            <td class="price">2950 руб.</td>
+            <td class="order"> <a class="text-center">ОФОРМИТЬ ЗАКАЗ</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+
+
+
+
+
 
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
