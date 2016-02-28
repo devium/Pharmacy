@@ -14,7 +14,7 @@
 }
 
 .jumbotron {
-  background-image: url("../img/large_placeholder.jpg");
+  background-image: url("./media/image/large_placeholder.jpg");
   margin-top: -20px;
   height: 90vh;
   background-repeat: no-repeat;
