@@ -1,10 +1,13 @@
 import os
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
-SECRET_KEY = '!)3@q!a2zf4lv76o4ahv-9!hv_@kq31-_seekb@x1166one7r&'
+SECRET_KEY = '+90h5($8l&nyjpz4w*pj6=10zq^d+4sqb%%o9i5281lr)nyw)^'
 
+# SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -15,8 +18,8 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'carts',
     'products',
+    'carts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -27,7 +30,6 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'pharmacy.urls'
@@ -65,6 +67,7 @@ USE_I18N = True
 
 USE_L10N = True
 
+#TODO: fix timezone bug
 USE_TZ = True
 
 STATIC_URL = '/static/'
@@ -75,6 +78,4 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, '..', 'static'),
 ]
 
-# TEMPLATE_DIRS = (
-#     os.path.join(BASE_DIR, 'templates'),
-# )
+# TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
