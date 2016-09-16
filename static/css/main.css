@@ -14,7 +14,8 @@
 }
 
 .jumbotron {
-  background-image: url("../media/images/large_placeholder.jpg");
+    /*TODO прописать нормальынй путь до фона*/
+  /*background-image: url("../../media/images/large_placeholder.jpg");*/
   margin-top: -20px;
   height: 90vh;
   background-repeat: no-repeat;
