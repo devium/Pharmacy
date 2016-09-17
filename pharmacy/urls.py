@@ -3,15 +3,15 @@ from django.contrib import admin
 from django.conf import settings
 from django.views.static import serve
 
-from products.views import HomePageView
+from products.views import HomePageView, CatalogueView, AddProductView
 
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
-    # url(r'^$', 'products.views.home', name='home'),
     url(r'^$', HomePageView.as_view(), name='home'),
-    # url(r'^catalogue$', 'products.views.catalogue', name='catalogue'),
+    url(r'^add/(?P<pk>.*)/(?P<slug>.*)$', AddProductView.as_view(), name='add_product'),
+    url(r'^catalogue/(?P<slug>.*)$', CatalogueView.as_view(), name='catalogue'),
     # url(r'^help$', 'products.views.help', name='help'),
     # url(r'^delivery_help$', 'products.views.delivery_help', name='delivery_help'),
     # url(r'^order_help$', 'products.views.order_help', name='order_help'),
