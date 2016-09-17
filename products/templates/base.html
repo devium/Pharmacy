@@ -37,7 +37,15 @@
         </div>
       </div>
     </nav>
+    {% if messages %}
+        <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+        </ul>
+    {% endif %}
     {% block content %}{%  endblock %}
+    {% block footer %}
     <div class="footer-wrapper">
       <div class="container">
         <div class="row">
@@ -47,6 +55,7 @@
         </div>
       </div>
     </div>
+    {%  endblock %}
     <script src="{% static 'js/jquery.min.js' %}"></script>
     <script src="{% static 'js/bootstrap.min.js' %}"></script>
   </body>

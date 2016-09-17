@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{%  block header %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock %}
+{% block content %}
+
+    <div class="layout-search">
+      <div class="search-box">
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Название лекарства">
+            <span class="input-group-btn">
+              <button class="btn btn-default" type="button">Найти</button>
+            </span>
+        </div>
+      </div>
+    </div>
+
+      <div class="drugs-list">
+        <div class="categories">
+          <div id="wrapper">
+           <!-- sidebar-wrapper -->
+            <div id="sidebar-wrapper">
+              <ul class="sidebar-nav">
+                {% for cat in categories %}
+                  <li>
+                    <a href="{{ cat.get_url }}">{{ cat }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            </div>
+
+            <div id="page-content-wrapper">
+              <!-- container-fluid -->
+              <div class="container-fluid">
+                <div class="row">
+                    {% for prod in products %}
+                        <div class="col-sm-6 col-md-4">
+                            <div class="thumbnail">
+                              <a class="item" href="#">
+                                <img src="/media/images/placeholder.png" alt="">
+                                <h3>{{ prod }}</h3>
+                                <p>{{ prod.description }}</p>
+                                <p><a href="{% url 'add_product' prod.pk slug %}" class="btn btn-primary" role="button">В корзину</a></p>
+                                {% if prod.sale_price %}
+                                    <p>{{ prod.price }} руб</p>
+                                    <p>{{ prod.sale_price }} руб</p>
+                                {% else %}
+                                    <p>{{ prod.price }} руб</p>
+                                {% endif %}
+                              </a>
+                            </div>
+                          </div>
+                    {% endfor %}
+                </div>
+              </div>
+              <!-- /#container-fluid -->
+            </div>
+
+          </div>
+          <!-- /#sidebar-wrapper -->
+        </div>
+      </div>
+{% endblock %}
+{% block footer %}{% endblock %}
