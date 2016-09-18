@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{%  block header %}
+    <link rel="stylesheet" href="{% static 'css/cart.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container text-center">
+      <h1>Корзина</h1>
+      <table class="table">
+        <thead class="thread-default">
+          <tr class="row list-inline columnCaptions">
+            <th>Количество</th>
+            <th>Наименование</th>
+            <th>Цена</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+            <tr class="row">
+            <td class="quantity">{{ item.quantity }}</td>
+            <td class="itemName" align="left">{{ item.title }}</td>
+            <td class="price" align="left">{% if item.sale_price %}{{ item.sale_price }}{% else %}{{ item.price }}{% endif %} руб.</td>
+            <td>
+              <a type="button" class="btn btn-default btn-xs" aria-label="Left Align" href="{% url 'remove_cart' item.pk %}">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">-</span>
+              </a>
+            </td>
+            <td>
+              <a type="button" class="btn btn-default btn-xs" aria-label="Left Align" href="{% url 'add_cart' item.pk %}">
+                <span class="glyphicon glyphicon-remove-circle" aria-hidden="true">+</span>
+              </a>
+            </td>
+          </tr>
+        {% endfor %}
+          <tr class="row totals">
+            <td class="itemName">Всего:</td>
+            <td class="price">{{ summa }} руб.</td>
+            <td class="order"> <a class="text-center">ОФОРМИТЬ ЗАКАЗ</a></td>
+          </tr>
+        </tbody>
+      </table>
+
+
+    </div>
+{% endblock %}
+{% block footer %}{% endblock %}

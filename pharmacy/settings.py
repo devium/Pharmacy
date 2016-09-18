@@ -19,7 +19,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'products',
-    'carts',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -58,6 +57,8 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
+
+SESSION_SAVE_EVERY_REQUEST = True
 
 LANGUAGE_CODE = 'ru'
 

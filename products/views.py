@@ -1,5 +1,8 @@
 from django.contrib import messages
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import resolve
+from django.urls import reverse
 from django.views import View
 from django.views.generic import TemplateView
 
@@ -36,8 +39,46 @@ class CatalogueView(TemplateView):
         return context
 
 
-# TODO переместить в carts
 class AddProductView(View):
     def get(self, request, pk, slug, *args, **kwargs):
         messages.success(request, 'Added')
+        if 'cart' not in request.session:
+            request.session['cart'] = {pk: 1}
+        else:
+            request.session['cart'][pk] = request.session['cart'].get(pk, 0) + 1
         return redirect('catalogue', slug=slug)
+
+
+class AddCartView(View):
+    def get(self, request, pk, *args, **kwargs):
+        if 'cart' not in request.session:
+            request.session['cart'] = {pk: 1}
+        else:
+            request.session['cart'][pk] = request.session['cart'].get(pk, 0) + 1
+        return redirect('cart')
+
+
+class RemoveCartView(View):
+    def get(self, request, pk, *args, **kwargs):
+        if 'cart' in request.session:
+            count = request.session['cart'].pop(pk, 0)
+            if count:
+                request.session['cart'][pk] = count - 1
+        return redirect('cart')
+
+
+class CartView(TemplateView):
+    template_name = 'cart.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        cart = self.request.session.get('cart')
+        items = []
+        summa = 0
+        for item in Product.objects.filter(pk__in=cart.keys()):
+            item.quantity = cart.get(str(item.pk), 0)
+            summa += item.quantity * item.sale_price if item.sale_price else item.quantity * item.price
+            items.append(item)
+        context['items'] = items
+        context['summa'] = summa
+        return context
