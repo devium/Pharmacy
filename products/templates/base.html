@@ -30,9 +30,9 @@
 
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li><a href="catalogue">Каталог</a></li>
+            <li><a href="{% url 'catalogue' ''%}">Каталог</a></li>
             <li><a href="cart">Корзина</a></li>
-            <li><a href="help">Справка</a></li>
+            <li><a href="{% url 'help' %}">Справка</a></li>
           </ul>
         </div>
       </div>
