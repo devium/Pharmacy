@@ -59,6 +59,8 @@ DATABASES = {
     }
 }
 
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
 SESSION_SAVE_EVERY_REQUEST = True
 
 LANGUAGE_CODE = 'ru'
