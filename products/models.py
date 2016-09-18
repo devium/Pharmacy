@@ -58,6 +58,9 @@ class ProductImage(models.Model):
 
 class SelectedProduct(models.Model):
     user = models.CharField(max_length=20)
+    date = models.DateField(auto_now_add=True)
     product = models.ForeignKey(Product)
     quantity = models.IntegerField()
 
+    class Meta:
+        ordering = ('date', )

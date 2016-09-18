@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth import logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import resolve
@@ -8,7 +9,7 @@ from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 
-from products.models import Category, Product
+from products.models import Category, Product, SelectedProduct
 
 
 def help(request):
@@ -95,5 +96,11 @@ def logout_view(request):
     return redirect('home')
 
 
-class ProfileView(TemplateView):
-    template_name = 'profile.html'
+class HistoryView(LoginRequiredMixin, TemplateView):
+    template_name = 'history.html'
+    login_url = '/'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['items'] = SelectedProduct.objects.filter(user=self.request.user)
+        return context

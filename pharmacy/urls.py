@@ -5,14 +5,14 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 
 from products.views import HomePageView, CatalogueView, AddProductView, CartView, RemoveCartView, AddCartView, \
-    logout_view, ProfileView
+    logout_view, HistoryView
 
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
     url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^accounts/profile/$', ProfileView.as_view(), name='profile'),
+    url(r'^accounts/profile/$', HistoryView.as_view(), name='history'),
     url(r'^logout/$', logout_view, name='logout'),
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^add/(?P<pk>.*)/(?P<slug>.*)$', AddProductView.as_view(), name='add_product'),
