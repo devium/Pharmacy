@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<form role="form" action="." method="post">{% csrf_token %}
+  <div class="form-group">
+    <label for="exampleInputEmail1">Имя пользователя</label>
+    <input name="username" type="text" class="form-control" id="exampleInputEmail1" placeholder="Имя пользователя" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email</label>
+    <input name="email" type="email" class="form-control" id="exampleInputEmail1" placeholder="Email" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Пароль</label>
+    <input name="password1" type="password" class="form-control" id="InputPassword1" placeholder="Пароль" required>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Повторение пароля</label>
+    <input name="password2" type="password" class="form-control" id="InputPassword2" placeholder="Пароль еще раз" required>
+  </div>
+  <button type="submit" class="btn btn-default">Зарегистрироваться</button>
+</form>
+{% endblock %}

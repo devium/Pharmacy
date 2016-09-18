@@ -1,9 +1,11 @@
 from django.contrib import messages
+from django.contrib.auth import logout
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import resolve
 from django.urls import reverse
 from django.views import View
+from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 
 from products.models import Category, Product
@@ -82,3 +84,16 @@ class CartView(TemplateView):
         context['items'] = items
         context['summa'] = summa
         return context
+
+
+@never_cache
+def logout_view(request):
+    """
+    Logs out the user and displays 'You are logged out' message.
+    """
+    logout(request)
+    return redirect('home')
+
+
+class ProfileView(TemplateView):
+    template_name = 'profile.html'

@@ -4,12 +4,16 @@ from django.conf import settings
 from django.views.generic import TemplateView
 from django.views.static import serve
 
-from products.views import HomePageView, CatalogueView, AddProductView, CartView, RemoveCartView, AddCartView
+from products.views import HomePageView, CatalogueView, AddProductView, CartView, RemoveCartView, AddCartView, \
+    logout_view, ProfileView
 
 admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/', include(admin.site.urls)),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
+    url(r'^accounts/profile/$', ProfileView.as_view(), name='profile'),
+    url(r'^logout/$', logout_view, name='logout'),
     url(r'^$', HomePageView.as_view(), name='home'),
     url(r'^add/(?P<pk>.*)/(?P<slug>.*)$', AddProductView.as_view(), name='add_product'),
     url(r'^plus/(?P<pk>.*)/$', AddCartView.as_view(), name='add_cart'),

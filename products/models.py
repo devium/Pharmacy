@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
-
-
+from django.contrib.auth.models import User
 from django.db import models
 from django.core.urlresolvers import reverse
 
@@ -55,4 +54,10 @@ class ProductImage(models.Model):
 
     def __unicode__(self):
         return self.product.title
+
+
+class SelectedProduct(models.Model):
+    user = models.CharField(max_length=20)
+    product = models.ForeignKey(Product)
+    quantity = models.IntegerField()
 

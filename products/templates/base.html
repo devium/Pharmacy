@@ -33,6 +33,13 @@
             <li><a href="{% url 'catalogue' ''%}">Каталог</a></li>
             <li><a href="{% url 'cart' %}">Корзина</a></li>
             <li><a href="{% url 'help' %}">Справка</a></li>
+            {% if user.is_authenticated %}
+                <li><a href="{% url 'profile' %}">Настройки</a></li>
+                <li><a href="{% url 'logout' %}">Выход</a></li>
+            {%  else %}
+                <li><a href="{% url 'registration_register' %}">Регистрация</a></li>
+                <li><a href="{% url 'auth_login' %}">Авторизация</a></li>
+            {% endif %}
           </ul>
         </div>
       </div>
