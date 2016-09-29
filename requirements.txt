@@ -1,3 +1,13 @@
+defusedxml==0.4.1
 Django==1.10.1
+django-paypal==0.3.2
 django-registration==2.1.2
+oauthlib==2.0.0
 Pillow==3.3.1
+PyJWT==1.4.2
+python-social-auth==0.2.21
+python3-openid==3.0.10
+pytz==2016.6.1
+requests==2.11.1
+requests-oauthlib==0.6.2
+six==1.10.0
