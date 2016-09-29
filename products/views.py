@@ -21,14 +21,6 @@ def help(request):
     return render(request, 'help.html', {})
 
 
-def delivery_help(request):
-    return render(request, 'delivery_help.html', {})
-
-
-def order_help(request):
-    return render(request, 'order_help.html', {})
-
-
 class HomePageView(TemplateView):
     template_name = 'index.html'
 
@@ -92,6 +84,15 @@ class CartView(TemplateView):
         return context
 
 
+class ItemView(TemplateView):
+    template_name = 'item.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['item'] = get_object_or_404(Product, pk=kwargs['pk'])
+        return context
+
+
 @never_cache
 def logout_view(request):
     """
@@ -137,7 +138,9 @@ class BuyView(LoginRequiredMixin, View):
         return redirect('home')
 
 
-class PayPalView(FormView):
+class PayPalView(LoginRequiredMixin, FormView):
+    login_url = '/accounts/login/'
+    redirect_field_name = 'redirect_to'
     form_class = PayPalPaymentsForm
     template_name = 'payment.html'
 

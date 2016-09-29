@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{%  block header %}
+    <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+{% endblock %}
+{% block content %}
+
+    <div class="container">
+        <img src="/media/images/placeholder.png" alt="">
+        <div class="caption-full">
+            <h4 class="pull-right">150 руб</h4>
+            <h4>{{ item.title }}</h4>
+            <p><a href="{% url 'add_cart' item.pk %}" class="btn btn-primary" role="button">В корзину</a></p>
+            <h5>Состав</h5>
+            <p>{{ item.ingredients }}</p>
+            <h5>Описание</h5>
+            <p>{{ item.description }}</p>
+            <h5>Побочные эффекты</h5>
+            <p>{{ item.side_effects }}</p>
+        </div>
+    </div>
+
+{% endblock %}
+{% block footer %}{% endblock %}

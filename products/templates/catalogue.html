@@ -37,7 +37,7 @@
                     {% for prod in products %}
                         <div class="col-sm-6 col-md-4">
                             <div class="thumbnail">
-                              <a class="item" href="#">
+                              <a class="item" href="{% url 'item' prod.pk %}">
                                 <img src="/media/images/placeholder.png" alt="">
                                 <h3>{{ prod }}</h3>
                                 <p>{{ prod.description }}</p>
