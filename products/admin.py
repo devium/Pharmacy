@@ -3,7 +3,7 @@
 
 from django.contrib import admin
 
-from .models import Product, ProductImage, Category
+from .models import Product, ProductImage, Category, Order, SelectedProduct
 
 
 class ProductAdmin(admin.ModelAdmin):
@@ -20,6 +20,20 @@ class ProductAdmin(admin.ModelAdmin):
         model = Product
 
 
+class SelectedProductInline(admin.TabularInline):
+    model = SelectedProduct
+    exclude = ['user']
+
+
+class OrderAdmin(admin.ModelAdmin):
+    inlines = [SelectedProductInline]
+    list_display = ['pk', 'processed']
+    list_filter = ['processed']
+
+    class Meta:
+        model = Order
+
 admin.site.register(Product, ProductAdmin)
 admin.site.register(ProductImage)
 admin.site.register(Category)
+admin.site.register(Order, OrderAdmin)

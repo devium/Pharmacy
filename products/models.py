@@ -63,6 +63,9 @@ class Order(models.Model):
     class Meta:
         ordering = ('date', )
 
+    def __str__(self):
+        return str(self.pk)
+
 
 class SelectedProduct(models.Model):
     user = models.CharField(max_length=20)
@@ -73,3 +76,6 @@ class SelectedProduct(models.Model):
 
     class Meta:
         ordering = ('date', )
+
+    def __str__(self):
+        return self.product.title
