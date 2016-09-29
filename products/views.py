@@ -3,10 +3,7 @@ from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import resolve
-from django.urls import reverse
 from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
@@ -130,5 +127,6 @@ class BuyView(LoginRequiredMixin, View):
             'order@{}'.format(site_name),
             [request.user.email],
         )
+        messages.success(request, 'Done')
         return redirect('home')
 
