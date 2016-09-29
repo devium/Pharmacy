@@ -24,7 +24,7 @@ urlpatterns = [
     url(r'^cart/$', CartView.as_view(), name='cart'),
     url(r'^payment/$', PayPalView.as_view(), name='pay'),
     url(r'^paypal/', include('paypal.standard.ipn.urls')),
-    url('', include('social.apps.django_app.urls', namespace='social')),
+    url(r'^social/', include('social.apps.django_app.urls', namespace='social')),
 ]
 
 if settings.DEBUG:

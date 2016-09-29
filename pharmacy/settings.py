@@ -25,7 +25,7 @@ INSTALLED_APPS = (
 )
 
 AUTHENTICATION_BACKENDS = (
-    'social.backends.vk.VKOAuth2',
+    'products.utils.MyVKOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
 
@@ -52,6 +52,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social.apps.django_app.context_processors.backends',
+                'social.apps.django_app.context_processors.login_redirect',
             ],
         },
     },
@@ -89,5 +91,7 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-VK_APP_ID = ''
-VK_API_SECRET = ''
+LOGIN_REDIRECT_URL = '/'
+
+SOCIAL_AUTH_VK_OAUTH2_KEY = VK_APP_ID = '5640623'
+SOCIAL_AUTH_VK_OAUTH2_SECRET=VK_API_SECRET = 'Zc3zk0FFqbu26XgSjPtE'
