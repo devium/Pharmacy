@@ -11,7 +11,7 @@ from django.views import View
 from django.views.decorators.cache import never_cache
 from django.views.generic import TemplateView
 
-from products.models import Category, Product, SelectedProduct
+from products.models import Category, Product, SelectedProduct, Order
 
 
 def help(request):
@@ -77,7 +77,7 @@ class CartView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        cart = self.request.session.get('cart')
+        cart = self.request.session.get('cart', {})
         items = []
         summa = 0
         for item in Product.objects.filter(pk__in=cart.keys()):
@@ -113,11 +113,12 @@ class BuyView(LoginRequiredMixin, View):
     redirect_field_name = 'redirect_to'
 
     def get(self, request, *args, **kwargs):
-        cart = {}
+        cart = request.session.get('cart', {})
+        o = Order.objects.create()
         items_info = []
         for i, q in cart.items():
             pr = get_object_or_404(Product, pk=int(i))
-            SelectedProduct.objects.create(user=self.request.user, quantity=q, product=pr)
+            SelectedProduct.objects.create(user=self.request.user, quantity=q, product=pr, order=o)
             item_info = "{} x{}".format(pr.title, q)
             items_info.append(item_info)
 

@@ -56,11 +56,20 @@ class ProductImage(models.Model):
         return self.product.title
 
 
+class Order(models.Model):
+    date = models.DateField(auto_now_add=True)
+    processed = models.BooleanField(default=False)
+
+    class Meta:
+        ordering = ('date', )
+
+
 class SelectedProduct(models.Model):
     user = models.CharField(max_length=20)
     date = models.DateField(auto_now_add=True)
     product = models.ForeignKey(Product)
     quantity = models.IntegerField()
+    order = models.ForeignKey(Order)
 
     class Meta:
         ordering = ('date', )
