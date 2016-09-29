@@ -3,10 +3,16 @@ from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.sites.shortcuts import get_current_site
 from django.core.mail import send_mail
+from django.http import HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
+from django.urls import reverse
+from django.urls import reverse_lazy
 from django.views import View
 from django.views.decorators.cache import never_cache
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic import FormView
 from django.views.generic import TemplateView
+from paypal.standard.forms import PayPalPaymentsForm
 
 from products.models import Category, Product, SelectedProduct, Order
 
@@ -76,13 +82,13 @@ class CartView(TemplateView):
         context = super().get_context_data(**kwargs)
         cart = self.request.session.get('cart', {})
         items = []
-        summa = 0
+        total_sum = 0
         for item in Product.objects.filter(pk__in=cart.keys()):
             item.quantity = cart.get(str(item.pk), 0)
-            summa += item.quantity * item.sale_price if item.sale_price else item.quantity * item.price
+            total_sum += item.quantity * item.sale_price if item.sale_price else item.quantity * item.price
             items.append(item)
         context['items'] = items
-        context['summa'] = summa
+        context['total_sum'] = total_sum
         return context
 
 
@@ -110,7 +116,7 @@ class BuyView(LoginRequiredMixin, View):
     redirect_field_name = 'redirect_to'
 
     def get(self, request, *args, **kwargs):
-        cart = request.session.get('cart', {})
+        cart = request.session.pop('cart', {})
         o = Order.objects.create()
         items_info = []
         for i, q in cart.items():
@@ -130,3 +136,30 @@ class BuyView(LoginRequiredMixin, View):
         messages.success(request, 'Done')
         return redirect('home')
 
+
+class PayPalView(FormView):
+    form_class = PayPalPaymentsForm
+    template_name = 'payment.html'
+
+    def get_initial(self):
+        cart = self.request.session.get('cart', {})
+        total_sum = 0
+        for item in Product.objects.filter(pk__in=cart.keys()):
+            item.quantity = cart.get(str(item.pk), 0)
+            total_sum += item.quantity * item.sale_price if item.sale_price else item.quantity * item.price
+        paypal_dict = {
+            "business": "maxi.nikolsky@gmail.com",
+            "amount": total_sum,
+            "currency_code": "RUB",
+            "item_name": "Products in shop",
+            "invoice": "INV-00001",
+            "notify_url": reverse('paypal-ipn'),
+            "return_url": "http://{}{}".format(self.request.get_host(), reverse('buy')),
+            "cancel_return": "http://{}{}".format(self.request.get_host(), reverse('pay')),
+            "custom": str(self.request.user.id)
+        }
+        return paypal_dict
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data()
+        return context

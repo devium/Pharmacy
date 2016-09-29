@@ -5,7 +5,7 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 
 from products.views import HomePageView, CatalogueView, AddProductView, CartView, RemoveCartView, AddCartView, \
-    logout_view, HistoryView, BuyView
+    logout_view, HistoryView, BuyView, PayPalView
 
 admin.autodiscover()
 
@@ -22,7 +22,8 @@ urlpatterns = [
     url(r'^help/$', TemplateView.as_view(template_name='help.html'), name='help'),
     url(r'^buy/$', BuyView.as_view(), name='buy'),
     url(r'^cart/$', CartView.as_view(), name='cart'),
-    # url(r'^paypal/', include('paypal.standard.ipn.urls')),
+    url(r'^payment/$', PayPalView.as_view(), name='pay'),
+    url(r'^paypal/', include('paypal.standard.ipn.urls')),
     url('', include('social.apps.django_app.urls', namespace='social')),
 ]
 

@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h3>You are to pay:</h3>
+    <p>{{ form.amount.initial }} {{ form.currency_code.initial }}</p>
+    <br/>
+    <p>Pay with PayPal:</p>
+        {{ form.render }}
+{% endblock %}
