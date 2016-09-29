@@ -20,6 +20,13 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'products',
     'registration',
+    'social.apps.django_app.default',
+    'paypal.standard.ipn',
+)
+
+AUTHENTICATION_BACKENDS = (
+    'social.backends.vk.VKOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -82,4 +89,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static'),
 ]
 
-# TEMPLATE_DIRS = (os.path.join(BASE_DIR,  'templates'),)
+VK_APP_ID = ''
+VK_API_SECRET = ''
