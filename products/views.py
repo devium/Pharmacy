@@ -147,9 +147,16 @@ class PayPalView(LoginRequiredMixin, FormView):
     def get_initial(self):
         cart = self.request.session.get('cart', {})
         total_sum = 0
+        err = False
         for item in Product.objects.filter(pk__in=cart.keys()):
-            item.quantity = cart.get(str(item.pk), 0)
-            total_sum += item.quantity * item.sale_price if item.sale_price else item.quantity * item.price
+            q = cart.get(str(item.pk), 0)
+            if item.count >= q:
+                item.quantity = q
+                total_sum += item.quantity * item.sale_price if item.sale_price else item.quantity * item.price
+            else:
+                err = True
+        if err:
+            messages.success(self.request, 'Некоторые товары не удалось купить. Они удалены из заказа')
         paypal_dict = {
             "business": "maxi.nikolsky@gmail.com",
             "amount": total_sum,

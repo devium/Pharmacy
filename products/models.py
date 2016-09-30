@@ -33,6 +33,7 @@ class Product(models.Model):
     updated = models.DateTimeField(auto_now_add=False, auto_now=True)
     active = models.BooleanField(default=True)
     update_defaults = models.BooleanField(default=False)
+    count = models.IntegerField(default=1)
 
     def __str__(self):
         return self.title
