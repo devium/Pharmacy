@@ -53,8 +53,8 @@
 - [index.html](./products/templates/index.html)   — главная страница магазина
 - [item.html](./products/templates/item.html)   — страница конкретного товара
 - [payment.html](./products/templates/payment.html)  — страница оплаты, содержащая ссылку на форму оплаты paypal
-- [registratiom/login.html ](./products/templates/registratiom/login.html )  — страница логина пользователя
-- [registratiom/registration_form.html ](./products/templates/registration_form.html )  — страница регистрации пользователя
+- [registration/login.html ](./products/templates/registration/registratiom/login.html )  — страница логина пользователя
+- [registration/registration_form.html ](./products/templates/registration/registration_form.html )  — страница регистрации пользователя
 
 ## Работа бэкенда
 
